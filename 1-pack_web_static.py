@@ -4,6 +4,7 @@ import os
 from fabric.api import local
 from datetime import datetime
 
+
 def do_pack():
     """ Create a tar gzipped archived of the directory web_static """
 
@@ -17,4 +18,3 @@ def do_pack():
     if local("tar -cvzf {} web_static".format(archive_name)).failed:
         return None
     return archive_name
-
