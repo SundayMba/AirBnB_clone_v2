@@ -16,6 +16,8 @@ from flask import Flask
 from flask import render_template
 
 app = Flask(__name__)
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
 
 
 # root route decorator
@@ -59,6 +61,12 @@ def number_template(n):
         H1 tag: “Number: n” inside the tag BODY
     """
     return render_template('5-number.html', n=n)
+
+
+@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
+def number_odd_even(n):
+    """ H1 tag: “Number: n is even|odd” inside the tag BODY """
+    return render_template("6-number_odd_or_even.html", n=n)
 
 
 if __name__ == '__main__':
