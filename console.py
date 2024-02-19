@@ -181,7 +181,7 @@ class HBNBCommand(cmd.Cmd):
         except Exception:
             pass
         if not converted and value != "":
-            value = value[1:-1]
+            value = value[1:-1].replace("_", " ")
         return value
 
     def do_create(self, model):
@@ -264,7 +264,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ print all instances """
-        my_storage = storage.all()
+        my_storage = ""
         m = ['BaseModel',
              'Place',
              'User',
@@ -274,6 +274,10 @@ class HBNBCommand(cmd.Cmd):
              'Review'
              ]
         obj_list = []
+        if args == "":
+            my_storage = storage.all()
+        elif args in m:
+            my_storage = storage.all(args)
         if args == "" or (args in m and my_storage == {}):
             for user_id in my_storage.keys():
                 obj_list.append(str(my_storage[user_id]))
